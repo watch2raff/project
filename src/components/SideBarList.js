@@ -1,28 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import sidebarData from '../data/sidebarlist';
+import ElementList from './ElementList';
 
 class SideBarList extends React.Component {
-    constructor () {
-        super();
-
-        this.state = {
-            active: false
-        };
-    }
-
     render() {
         const component = [];
 
         sidebarData.forEach( (elem, i) => {
             const item = <li className='sidebar__item' key={i}>
-                <Link
-                    className={this.state.active ? 'sidebar__elem sidebar__elem--active' : 'sidebar__elem'}
-                    onClick={this.onClick}
-                    to={elem.url}
-                >
-                    {elem.name}
-                </Link>
+                <ElementList url={elem.url} name={elem.name}></ElementList>
             </li>;
 
             component.push(item)
@@ -32,14 +19,6 @@ class SideBarList extends React.Component {
               {component}
           </ul>
       }
-
-      onClick = (e) => {
-        this.setState({
-            active: !this.state.active
-        });
-
-        console.log(this.state.active);
-      };
 }
 
 export default SideBarList;
